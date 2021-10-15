@@ -1,9 +1,9 @@
-import './App.css';
+import './Dashboard.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import Chart from "./Chart";
 
-const AppRest = () => {
+const Dashboard = () => {
   const url = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/covid-19-qppza/service/REST-API/incoming_webhook/metadata';
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -16,21 +16,26 @@ const AppRest = () => {
   useEffect(() => {
     axios.get(url).then(res => {
       setCountries(res.data.countries);
-      const randomCountry = getRandomInt(res.data.countries.length);
-      setSelectedCountry(res.data.countries[randomCountry]);
-      setFilterCountry({"country": selectedCountry});
+      const randomCountryNumber = getRandomInt(res.data.countries.length);
+      let randomCountry = res.data.countries[randomCountryNumber];
+      setSelectedCountry(randomCountry);
+      setFilterCountry({"country": randomCountry});
     })
   }, [])
 
-  useEffect( () => {
-    setFilterCountry({"country": selectedCountry});
+  useEffect(() => {
+    if (selectedCountry !== "") {
+      setFilterCountry({"country": selectedCountry});
+    }
   }, [selectedCountry])
 
   return <div className="App">
     <h1 className="title">List of Countries</h1>
     <div className="form">
-      {countries.map(c => <div className="elem" key={c}><input type="radio" name="country" value={c} onChange={() => setSelectedCountry(c)} checked={c === selectedCountry}/><label
-        htmlFor={c} title={c}>{c}</label></div>)}
+      {countries.map(c => <div className="elem" key={c}>
+        <input type="radio" name="country" value={c} onChange={() => setSelectedCountry(c)} checked={c === selectedCountry}/>
+        <label htmlFor={c} title={c}>{c}</label>
+      </div>)}
     </div>
     <div className="charts">
       <Chart height={'600px'} width={'800px'} filter={filterCountry} chartId={'6e3cc5ef-2be2-421a-b913-512c80f492b3'}/>
@@ -41,4 +46,4 @@ const AppRest = () => {
   </div>
 };
 
-export default AppRest;
+export default Dashboard;
