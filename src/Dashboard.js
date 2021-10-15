@@ -30,7 +30,8 @@ const Dashboard = () => {
   }, [selectedCountry])
 
   return <div className="App">
-    <h1 className="title">List of Countries</h1>
+    <h1 className="title">MongoDB Charts</h1>
+    <h2 className="title">COVID-19 Dashboard with Filters</h2>
     <div className="form">
       {countries.map(c => <div className="elem" key={c}>
         <input type="radio" name="country" value={c} onChange={() => setSelectedCountry(c)} checked={c === selectedCountry}/>
