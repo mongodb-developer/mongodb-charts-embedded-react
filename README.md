@@ -1,6 +1,8 @@
 # React Website with Embedded MongoDB Charts
 
-This website is an example of how you can embed charts built with MongoDB Charts into a React website with dynamic filters.
+This [website](https://react-charts-npwaa-qynhm.mongodbstitch.com/) is an example of how you can embed charts built with MongoDB Charts into a React website with dynamic filters.
+
+![Website screenshot](https://mongodb-devhub-cms.s3.us-west-1.amazonaws.com/website_2255a0a81c.png)
 
 This repository is part of the [second blog post](https://www.mongodb.com/developer/how-to/mongodb-charts-embedding-sdk-react/) of this series of two blog posts.
 
